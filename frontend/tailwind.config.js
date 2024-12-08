@@ -4,9 +4,18 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {},
-  },
+  theme:
+    {
+      extend:{
+        colors:{
+           'custom-color':'#a9cdec',
+        },
+      },
+      fontFamily: {
+        display: [ "Parkinsans", "sans-serif"],
+        Ribeye:["Piazzolla", "serif"],
+      },
+    },
   plugins: [],
 }
 
