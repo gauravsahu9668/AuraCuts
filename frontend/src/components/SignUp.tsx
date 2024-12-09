@@ -14,8 +14,7 @@ const SignUp = () => {
             <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
                 <h1 className="text-2xl absolute w-fit left-44 mt-24 font-display font-medium">Welcome to website</h1>
                 <p className="text-sm absolute w-fit left-14 mt-40 leading-relaxed text-start ">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                  nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                Connecting Customers with Style and Shopkeepers with Success. Whether You're Here to Book the Perfect Cut or Manage Your Salon Effortlessly, We've Got You Covered. Step In and Experience Grooming Made Simple!"
                 </p>
             </div>
             {/*sign up section */}
