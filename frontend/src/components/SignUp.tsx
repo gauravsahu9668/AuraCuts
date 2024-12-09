@@ -8,42 +8,50 @@ import SignFormShop from "../Shopkeeper/SignFormShop";
 const SignUp = () => {
      const {id}=useParams();
   return (
-    <div className="w-[100vw] h-[100vh] px-10 py-7 bg-gray-400">
-       <div className=" w-full h-full flex p-4 bg-gray-700 rounded-md">
-            <div className="w-[50%] h-full bg-gray-600 rounded-md">
+    <div className="flex h-screen items-center font-display justify-center bg-gradient-to-br from-[#8360df] to-pink-300">
+          <div className="flex w-[75%] h-[70%] bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
+            {/* Welcome Section */}
+            <div className="flex-1 p-20 px-36 justify-center bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
+                <h1 className="text-4xl text-center mt-28 mb-6 font-display font-medium text-[50px]">Welcome to website</h1>
+                <p className="text-lg leading-relaxed text-left ">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                  nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                </p>
             </div>
-            <div className="w-[45%] h-full py-8 px-20 mx-auto">
-                <h1 className="text-5xl font-bold text-white ">{
-                   id==="shopKeeper" ? "Create your Shop" : "Create an Account"
-                  }</h1>
-                <div className="flex flex-row text-gray-400 mt-5 text-[1.2rem] gap-x-3">
-                  <p >Already have an account?</p>
-                  <Link to="/login" className="font-semibold text-gray-900 underline">login</Link>
-                </div>
-                <div>
-                  {
-                    id==="shopKeeper"? <SignFormShop></SignFormShop> : <SignupFormCust></SignupFormCust>
-                  }
-                   {/* <SignFormShop></SignFormShop> */}
-                   {/* <SignupFormCust></SignupFormCust> */}
-                </div>
-                <div className="flex flex-col w-full my-5">
-                <div className="flex items-center">
+            {/*sign up section */}
+            <div className="flex-1 p-8 flex flex-col justify-center cursor-default">
+              <h1 className="text-5xl mt-8 font-medium font-display text-center mb-8 text-[#8929b5]">{
+                id==="shopKeeper" ? "Create your Shop" : "Create an Account"}
+              </h1>
+                
+              <div>
+                {
+                  id==="shopKeeper"? <SignFormShop></SignFormShop> : <SignupFormCust></SignupFormCust>
+                }
+                  {/* <SignFormShop></SignFormShop> */}
+                  {/* <SignupFormCust></SignupFormCust> */}
+              </div>
+              <div className="flex flex-col w-full my-5">
+                <div className="flex items-center cursor-default">
                     <div className="w-[40%] h-[3px] rounded-sm bg-gray-500 mr-2"></div>
                     <p className="text-gray-400 text-[1.2rem] whitespace-nowrap">Or register with</p>
                     <div className="w-[40%] h-[3px] rounded-sm bg-gray-500 ml-2"></div>
                 </div>
                 <div className="flex w-full justify-between mt-4 gap-x-8">
-                  <div className="w-[50%] text-white text-[1.4rem] flex items-center justify-center border-gray-400 border-[2px] rounded-md p-2">
-                      <img src={google} className="w-[25px] mr-3"></img>
-                     <h2 className="font-semibold">Google</h2>
+                  <div className="group w-[50%]  text-[1.4rem] flex items-center  justify-center border-gray-400 border-[2px] rounded-md p-2 hover:cursor-pointer hover:bg-slate-300/[0.3]">
+                      <img src={google} className="w-[25px] mr-2"></img>
+                      <h2 className="font-medium text-[black]/[0.8] group-hover:text-black">Google</h2>
                   </div>
-                  <div className="w-[50%] text-white text-[1.4rem] flex items-center justify-center border-gray-400 border-[2px] rounded-md p-2">
-                      <FaApple className="w-[25px] mr-3"></FaApple>
-                      <h2 className="font-semibold">Apple</h2>
+                  <div className="group w-[50%]  text-[1.4rem] flex items-center justify-center text-center border-gray-400 border-[2px]  hover:cursor-pointer rounded-md p-2 hover:bg-slate-300/[0.3]">
+                      <FaApple className="w-[30px] mr-0 mb-0.5"></FaApple>
+                      <h2 className="font-medium text-[black]/[0.8] group-hover:text-black">Apple</h2>
                   </div>
                 </div>
-                 </div>
+              </div>
+                <div className="text-[15px] flex justify-center space-x-1 hover:cursor-default">
+                  <p>Already have an account</p>
+                  <Link to="/login" className="font-semibold text-gray-900 underline">login</Link> 
+                </div>
             </div>
        </div>
     </div>
