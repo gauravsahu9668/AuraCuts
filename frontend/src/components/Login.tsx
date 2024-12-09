@@ -12,22 +12,22 @@ const Login=()=>{
     
     return (
         <div className="flex h-screen items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
-          <div className="flex w-[75%] h-[70%] bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
+          <div className="flex w-[75%] h-4/5 relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
             {/* Welcome Section */}
-            <div className="flex-1 p-20 px-36 justify-center bg-gradient-to-br  from-[#8360df] to-pink-300 text-white">
-              <h1 className="text-4xl text-center mt-28 mb-6 font-display font-medium text-[50px]">Welcome to website</h1>
-              <p className="text-lg leading-relaxed text-left ">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </p>
+            <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
+                <h1 className="text-2xl absolute w-fit left-44 mt-24 font-display font-medium">Welcome to website</h1>
+                <p className="text-sm absolute w-fit left-14 mt-40 leading-relaxed text-start ">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                  nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                </p>
             </div>
     
             {/* Login Section */}
-            <div className="flex-1 p-8 flex flex-col justify-center ">
+            <div  className="right-0 absolute w-2/4 p-8 flex flex-col justify-center cursor-default">
               {/* <h1 className="text-5xl font-medium font-display text-center mb-8 text-[#8929b5]">User Login</h1> */}
-              <h1 className="text-5xl font-medium font-display text-center mb-8 text-[#8929b5]">User Login</h1>
+              <h1 className="text-4xl font-medium font-display text-center mt-5 mr-7 text-[#8929b5]">User Login</h1>
 
-              <form className="space-y-4 px-12">
+              <form className="absolute top-32 left-14 space-y-7 px-12">
                 {/* customer/shopkeeper */}
                 <div className="flex space-x-4 justify-between" >
                 {/* Button 1 */}
@@ -101,7 +101,7 @@ const Login=()=>{
                 </div>
 
                 {/*Create Account*/}
-                <div className="text-[15px] flex justify-center space-x-1">
+                <div className=" text-[15px] flex justify-center space-x-1">
                     <p>Don't have an account? </p>
                     <p onClick={goBack}
                     className="font-semibold text-gray-900 underline hover:cursor-pointer">

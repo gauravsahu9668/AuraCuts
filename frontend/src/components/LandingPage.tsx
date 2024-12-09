@@ -1,23 +1,13 @@
+import Section1 from "./LandingSections/Section1";
+import Section2 from "./LandingSections/Section2";
+import Section3 from "./LandingSections/Section3";
 
-
-const LandingPage = () => {
-  return (
-    <div>
-      <div className="overflow-hidden w-full flex flex-col items-center justify-center">
-        <div className="w-3/4 flex flex-col items-center justify-center relative ">
-          <img src="../src/Assets/w.png" alt="" className="w-full "/>
-          <span className="font-Ribeye absolute text-slate-800 text-9xl mr-64 mb-96 pb-48">Welcome to<br/><h2 className="text-8xl">Aura Cuts</h2></span>
-          <p className="font-display absolute mt-24 mr-96 pb-44 text-lg font-medium" >
-            Discover barber shops near you, view their services,<br/> and pick a 
-            time slot that fits your schedule perfectly.<br/> With Aura Cut, you have the freedom to choose<br/>
-            your favorite barber and book a haircut or grooming<br/>session in just a few clicks.</p>
+export default function Landing_Page(){
+    return(
+         <div className="relative overflow-hidden w-full flex flex-col items-center justify-center">
+          <Section1/>
+          <Section2/>
+          <Section3/>
         </div>
-        <div className="w-3/4 flex flex-col items-center justify-center">
-          <img src="../src/Assets/y.png" alt="" className="w-full"/>
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
-
-export default LandingPage

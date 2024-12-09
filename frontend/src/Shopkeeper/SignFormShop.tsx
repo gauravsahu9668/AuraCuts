@@ -1,23 +1,23 @@
 
 const SignFormShop = () => {
   return (
-    <div>
-      <form className="space-y-4 px-12">
+    <div className="absolute left-0 top-12 w-full">
+      <form className=" scale-[80%] space-y-4">
                 {/* Username Input */}
-                <div className="flex justify-between">
+                <div className="flex  justify-between">
                   <div className="flex-row justify-center items-center">
                      <input
                      type="text"
                      placeholder="First Name"
-                     className="w- px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                     className=" px-4 py-2 border bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                      required
                      />
                   </div>
-                  <div className="flex-row justify-center items-center">
+                  <div className="flex-row justify-center items-center ">
                      <input
                      type="text"
                      placeholder="Last Name"
-                     className="w- px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                     className=" px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                      required
                      />
                   </div>
@@ -28,7 +28,7 @@ const SignFormShop = () => {
                   <input
                     type="text"
                     placeholder="Email"
-                    className="w-full px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full  px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                     required
                   />
                 </div>

@@ -9,18 +9,18 @@ const SignUp = () => {
      const {id}=useParams();
   return (
     <div className="flex h-screen items-center font-display justify-center bg-gradient-to-br from-[#8360df] to-pink-300">
-          <div className="flex w-[75%] h-[70%] bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
+          <div className="flex flex-row relative w-[75%] h-4/5 bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
             {/* Welcome Section */}
-            <div className="flex-1 p-20 px-36 justify-center bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
-                <h1 className="text-4xl text-center mt-28 mb-6 font-display font-medium text-[50px]">Welcome to website</h1>
-                <p className="text-lg leading-relaxed text-left ">
+            <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
+                <h1 className="text-2xl absolute w-fit left-44 mt-24 font-display font-medium">Welcome to website</h1>
+                <p className="text-sm absolute w-fit left-14 mt-40 leading-relaxed text-start ">
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                   nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                 </p>
             </div>
             {/*sign up section */}
-            <div className="flex-1 p-8 flex flex-col justify-center cursor-default">
-              <h1 className="text-5xl mt-8 font-medium font-display text-center mb-8 text-[#8929b5]">{
+            <div className="right-0 absolute w-2/4 p-8 flex flex-col justify-center cursor-default">
+              <h1 className="text-2xl  top-6 font-medium font-display text-center  text-[#8929b5]">{
                 id==="shopKeeper" ? "Create your Shop" : "Create an Account"}
               </h1>
                 
@@ -28,10 +28,8 @@ const SignUp = () => {
                 {
                   id==="shopKeeper"? <SignFormShop></SignFormShop> : <SignupFormCust></SignupFormCust>
                 }
-                  {/* <SignFormShop></SignFormShop> */}
-                  {/* <SignupFormCust></SignupFormCust> */}
               </div>
-              <div className="flex flex-col w-full my-5">
+              <div className="flex scale-[80%] absolute flex-col w-full top-96 mt-11 right-3 ">
                 <div className="flex items-center cursor-default">
                     <div className="w-[40%] h-[3px] rounded-sm bg-gray-500 mr-2"></div>
                     <p className="text-gray-400 text-[1.2rem] whitespace-nowrap">Or register with</p>
@@ -48,7 +46,7 @@ const SignUp = () => {
                   </div>
                 </div>
               </div>
-                <div className="text-[15px] flex justify-center space-x-1 hover:cursor-default">
+                <div className="text-[15px] absolute top-96 right-44 flex justify-center space-x-1 hover:cursor-default">
                   <p>Already have an account</p>
                   <Link to="/login" className="font-semibold text-gray-900 underline">login</Link> 
                 </div>
