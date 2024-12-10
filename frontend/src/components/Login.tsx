@@ -11,8 +11,8 @@ const Login=()=>{
 
     
     return (
-        <div className="flex h-screen items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
-          <div className="flex w-[75%] h-4/5 relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
+        <div className="flex min-h-[800px] h-screen min-w-[1589px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
+          <div className="flex w-[1190px] h-[630px] mt-8 relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
             {/* Welcome Section */}
             <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
                 <h1 className="text-2xl absolute w-fit left-44 mt-24 font-display font-medium">Welcome to website</h1>

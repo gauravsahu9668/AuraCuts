@@ -5,7 +5,7 @@ import { IoCall } from "react-icons/io5"
 import ContactUsForm from "../ContactUs/ContactUsForm"
 const Contact = () => {
   return (
-    <div className="flex h-screen  font-display bg-gradient-to-br from-[#8360df] to-pink-300">
+    <div className="flex h-screen min-h-[800px] min-w-[1589px] font-display bg-gradient-to-br from-[#8360df] to-pink-300">
        <div className="flex flex-row  w-[75%] h-4/5 mx-auto mt-20 rounded-md  bg-white rounded- shadow-slate-800 shadow-2xl">
           <div className=" p-20 w-[50%] h-full  bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
           <div >
@@ -27,8 +27,8 @@ const Contact = () => {
                     <span>+123 456 7890</span>
             </div>
           </div>
-          <div className='w-[50%] h-full px-14 '>
-            <p className='text-2xl my-3 font-medium font-display text-center  text-[#8929b5]'>Tell me something about yoursel</p>
+          <div className='w-[50%] h-full px-14 py-6'>
+            <p className='text-2xl mb-4 font-medium font-display text-center  text-[#8929b5]'>Tell me something about yourself</p>
             <ConatctUsForm></ConatctUsForm>
           </div>
        </div> 
