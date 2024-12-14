@@ -1,14 +1,50 @@
-import{Link,useParams} from "react-router-dom"
-import React,{useState} from 'react';
+// import{Link,useParams} from "react-router-dom"
+import React,{useState,useMemo} from 'react';
+import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
-const Login=()=>{
-    const {id}=useParams();
+type FormFields={
+  username:string;
+  password:string;  
+}
+  
+
+const Login=()=>{    
+      const { register,
+        handleSubmit,
+        formState: {errors,isSubmitting},
+      } = useForm<FormFields>();
+
+      const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+        toast.success("Login Succesful")
+        console.log("sfjlsdf")
+      };
+    
     const goBack = () => {
         window.history.back();
     };
 
-      const [selectedButton, setSelectedButton] = useState<string|null>(null);
+    const [selectedButton, setSelectedButton] = useState<string|null>("customer");
+   
+    const button1Handler=()=>{
+      
+        if(selectedButton!=="customer"){
+          setSelectedButton("customer")
+        }
+        else{
+          setSelectedButton(null)
+        }
+    }
 
+    const button2Handler=()=>{
+        if(selectedButton!=="shopkeeper"){
+          setSelectedButton("shopkeeper")
+        }
+        else{
+          setSelectedButton(null)
+        }
+    }
     
     return (
         <div className="flex min-h-[800px] h-screen min-w-[1589px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
@@ -27,13 +63,14 @@ const Login=()=>{
               {/* <h1 className="text-5xl font-medium font-display text-center mb-8 text-[#8929b5]">User Login</h1> */}
               <h1 className="text-4xl font-medium font-display text-center mt-5 mr-7 text-[#8929b5]">User Login</h1>
 
-              <form className="absolute top-32 left-14 space-y-7 px-12">
+              <form className="absolute top-32 left-14 space-y-4 px-12" onSubmit={handleSubmit(onSubmit)} >
                 {/* customer/shopkeeper */}
-                <div className="flex space-x-4 justify-between" >
+                
+                <div className="flex space-x-4 justify-between pb-5" >
                 {/* Button 1 */}
-                    <button
-                        onClick={() => setSelectedButton("customer")}
-                        className={`customer w-[50%] px-4 py-2 rounded-full ${
+                    <button 
+                        onClick={button1Handler}
+                        className={`w-[50%] px-4 py-2 rounded-full  ${
                         selectedButton === "customer"
                             ? " text-white bg-gradient-to-r from-purple-600 to-blue-500"
                             : "bg-[#a79eec]/[0.1] border text-gray-700 hover:bg-gray-400"
@@ -44,8 +81,8 @@ const Login=()=>{
 
                 {/* Button 2 */}
                     <button
-                        onClick={() => setSelectedButton("shopkeeper")}
-                        className={`shopkeeper w-[50%] px-4 py-2 rounded-full ${
+                        onClick={button2Handler}
+                        className={`w-[50%] px-4 py-2 rounded-full ${
                         selectedButton === "shopkeeper"
                             ? " text-white  bg-gradient-to-r from-blue-500 to-purple-600"
                             : "bg-[#a79eec]/[0.1] border text-gray-700  hover:bg-gray-400"
@@ -55,25 +92,34 @@ const Login=()=>{
                     </button>
                 </div>
 
-
                 {/* Username Input */}
                 <div className="flex-row justify-center items-center">
                   <input
+                    {...register("username",{
+                      required:"Username is required"
+                    }) }
                     type="text"
                     placeholder="Username"
                     className="w-full px-4 py-2 border bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    required
                   />
-                </div>
+                     <div className='h-3'>{errors.username && (<div className="text-red-500">{errors.username.message}</div>)}</div>
+                  </div>
     
                 {/* Password Input */}
                 <div>
                   <input
+                    {...register("password",{
+                      required:"Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must have atleast 8 characters",
+                      }
+                    })}
                     type="password"
                     placeholder="Password"
                     className=" w-full px-4 py-2 border bg-[#a79eec]/[0.1] border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    required
                   />
+                  <div className='h-3'>{errors.password && (<div className='text-red-500'>{errors.password.message}</div>)}</div>
                 </div>
     
                 {/* Options */}
@@ -107,7 +153,6 @@ const Login=()=>{
                     className="font-semibold text-gray-900 underline hover:cursor-pointer">
                         Create Your Account
                     </p>
-                    {/* {id==="shopKeeper"?<Link to="/signup/shopkeeper" className="font-semibold text-gray-900 underline">Create Your Account</Link> :<Link to="/signup/customer" className="font-semibold text-gray-900 underline">Create Your Account</Link>} */}
                 </div>
               </form>
             </div>

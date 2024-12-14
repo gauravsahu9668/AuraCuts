@@ -28,7 +28,7 @@ const SignUp = () => {
                   id==="shopKeeper"? <SignFormShop></SignFormShop> : <SignupFormCust></SignupFormCust>
                 }
               </div>
-              <div className="flex scale-[80%] absolute flex-col w-full top-96 mt-11 right-3 ">
+              <div className="flex scale-[80%] absolute flex-col w-full top-[430px] mt-11 right-3 ">
                 <div className="flex items-center cursor-default">
                     <div className="w-[40%] h-[3px] rounded-sm bg-gray-500 mr-2"></div>
                     <p className="text-gray-400 text-[1.2rem] whitespace-nowrap">Or register with</p>
@@ -45,7 +45,7 @@ const SignUp = () => {
                   </div>
                 </div>
               </div>
-                <div className="text-[15px] absolute top-96 right-44 flex justify-center space-x-1 hover:cursor-default">
+                <div className="text-[15px] absolute top-[430px] right-44 flex justify-center space-x-1 hover:cursor-default">
                   <p>Already have an account</p>
                   <Link to="/login" className="font-semibold text-gray-900 underline">login</Link> 
                 </div>
