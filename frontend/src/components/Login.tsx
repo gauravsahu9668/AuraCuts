@@ -45,7 +45,6 @@ const Login=()=>{
           setSelectedButton(null)
         }
     }
-    
     return (
         <div className="flex min-h-[800px] h-screen min-w-[1589px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
           <div className="flex w-[1190px] h-[630px] mt-8 relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">

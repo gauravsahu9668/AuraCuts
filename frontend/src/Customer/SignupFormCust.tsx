@@ -8,7 +8,7 @@ type FormFields={
   firstName:string;
   lastName:string;
   email:string;
-  phone:number;
+  phone:string;
   password:string;
   confirm_pw:string;
 }
@@ -25,7 +25,7 @@ const SignupFormCust = () => {
   }
   return (
     <div className="absolute left-0 top-12 w-full">
-      <form className="scale-[80%] space-y-4 " onSubmit={handleSubmit(onSubmit)}>
+      <form className="scale-[80%] text-[17px] font-normal  space-y-4 " onSubmit={handleSubmit(onSubmit)}>
                 {/* Username Input */}
                 <div className="flex flex-row justify-between w-full">
                   <div className="flex-row justify-center items-center w-[50%]">
@@ -56,7 +56,12 @@ const SignupFormCust = () => {
                 <div className="flex-row justify-center items-center">
                 <input
                   {...register("email",{
-                    required:"Email is required"
+                    required:"Email is required",
+                    validate:(value)=>{
+                      if(!value.includes("@")){
+                        return "Email must include @";
+                      }
+                    }
                  })}
                     type="text"
                     placeholder="Email"
@@ -69,11 +74,12 @@ const SignupFormCust = () => {
                 <div className="flex-row justify-center items-center">
                 <input
                     {...register("phone",{
-                      required:"Phone Number is required"
+                      required:"Phone Number(10 digit) is required",                          
                    })}
-                    type="text"
+                    pattern="[0-9]{10}"
+                    type="string"
                     placeholder="Phone Number"
-                    className="w-full px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-4 py-2 border appearance-none  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                     <div className='h-3'>{errors.phone && (<div className="text-red-500">{errors.phone.message}</div>)}</div>
                 </div>
@@ -81,7 +87,11 @@ const SignupFormCust = () => {
                 <div>
                 <input
                     {...register("password",{
-                            required:"Password is required"
+                            required:"Password is required",
+                            minLength: {
+                              value: 8,
+                              message: "Password must have atleast 8 characters",
+                            }
                         })}
                     type="password"
                     placeholder="Password"
@@ -93,7 +103,11 @@ const SignupFormCust = () => {
                 <div className="flex-row justify-center items-center">
                 <input
                     {...register("confirm_pw",{
-                      required:"Confirm Password is required"
+                      required:"Confirm Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must have atleast 8 characters",
+                      }
                   })}
                     type="text"
                     placeholder="Confirm Password"
