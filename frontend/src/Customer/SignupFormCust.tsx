@@ -65,7 +65,7 @@ const SignupFormCust = () => {
                  })}
                     type="text"
                     placeholder="Email"
-                    className="w-full px-4 py-2 border bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-4 py-2 border bg-[#a79eec]/[0.1] border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                     <div className='h-3'>{errors.email && (<div className="text-red-500">{errors.email.message}</div>)}
                     </div>

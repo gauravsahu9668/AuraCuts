@@ -75,10 +75,10 @@ const SignFormShop = () => {
                 <div className="flex-row justify-center items-center ">
                   <input
                     {...register("phone",{
-                      required:"Phone Number(10 digit) is required",
+                      required:"Phone Number(10 digit) is required"
                     })}
                     pattern="[0-9]{10}"
-                    type="string"
+                    type="text"
                     placeholder="Phone Number"
                     className="w-full px-4 py-2 border  bg-[#a79eec]/[0.1]  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />

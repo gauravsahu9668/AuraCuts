@@ -8,10 +8,10 @@ import SignFormShop from "../Shopkeeper/SignFormShop";
 const SignUp = () => {
      const {id}=useParams();
   return (
-    <div className="flex h-screen min-h-[800px] min-w-[1589px]  items-center font-display justify-center bg-gradient-to-br from-[#8360df] to-pink-300">
-          <div className="flex flex-row relative w-[1190px] h-[630px] bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
-            {/* Welcome Section */}
-            <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
+    <div className=" top-0 flex min-h-[800px] h-screen min-w-[1569px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
+        <div className="flex bottom-8 w-[1190px] h-[630px] relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
+          {/* Welcome Section */}
+            <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white cursor-default">
                 <h1 className="text-2xl absolute w-fit left-44 mt-24 font-display font-medium">Welcome to website</h1>
                 <p className="text-sm absolute w-fit left-14 mt-40 leading-relaxed text-start ">
                 Connecting Customers with Style and Shopkeepers with Success. Whether You're Here to Book the Perfect Cut or Manage Your Salon Effortlessly, We've Got You Covered. Step In and Experience Grooming Made Simple!"
@@ -19,7 +19,7 @@ const SignUp = () => {
             </div>
             {/*sign up section */}
             <div className="right-0 absolute w-2/4 p-8 flex flex-col justify-center cursor-default">
-              <h1 className="text-2xl  top-6 font-medium font-display text-center  text-[#8929b5]">{
+              <h1 className="text-3xl  top-6 font-medium font-display text-center  text-[#8929b5]">{
                 id==="shopKeeper" ? "Create your Shop" : "Create an Account"}
               </h1>
                 

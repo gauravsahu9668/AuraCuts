@@ -3,7 +3,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { MdOutlineLocationOn } from "react-icons/md";
 export default function Section2(){
     return(
-        <div className="w-3/4 flex flex-col relative items-center justify-center" id="Section2">
+        <div className="w-[1200px] flex flex-col relative items-center justify-center" id="Section2">
           <img src="../src/Assets/y.png" alt="" className="w-full"/>
           <p className="cursor-default absolute text-slate-800 font-serif text-6xl left-32 top-36">Why Choose Aura Cuts?</p>
           <div className="cursor-default absolute font-serif text-2xl left-32 top-60">At Aura Cut, we specialize in making your grooming<br/>

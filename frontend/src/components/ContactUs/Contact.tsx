@@ -5,9 +5,9 @@ import { IoCall } from "react-icons/io5"
 import ContactUsForm from "../ContactUs/ContactUsForm"
 const Contact = () => {
   return (
-    <div className="flex h-screen min-h-[800px] min-w-[1589px] font-display bg-gradient-to-br from-[#8360df] to-pink-300">
-       <div className="flex flex-row  w-[75%] h-4/5 mx-auto mt-20 rounded-md  bg-white rounded- shadow-slate-800 shadow-2xl">
-          <div className=" p-20 w-[50%] h-full  bg-gradient-to-br  from-[#8360df] to-pink-300 text-white hover:cursor-default">
+    <div className=" flex h-screen min-h-[800px] min-w-[1569px] font-display bg-gradient-to-br from-[#8360df] to-pink-300">
+       <div className="flex relative bottom-8 flex-row  w-[1200px] h-[650px] mx-auto mt-20 rounded-md  bg-white rounded- shadow-slate-800 shadow-2xl">
+          <div className=" p-20 w-[50%] h-full  bg-gradient-to-br  from-[#8360df] to-pink-300 text-white cursor-default">
           <div >
                     <div className='flex flex-row items-center gap-3 '><MdOutlineMessage color='white'></MdOutlineMessage> <h1 className='text-[20px] font-bold text-white'>Chat on Us</h1></div>
                     Our friendly team is here to help.
