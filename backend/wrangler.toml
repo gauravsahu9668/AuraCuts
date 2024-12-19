@@ -9,8 +9,7 @@ compatibility_date = "2024-12-05"
   # Set the external module flag if needed
 
 [vars]
-DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZjMwYjFjYzQtYjUyYS00ODE4LTlhYmMtYWZhMjkyMjA1MGRmIiwidGVuYW50X2lkIjoiZmU4Yjc3OTdhZjA1MjQ1OWJlM2Y1YzU0ZDczM2JlMDUyZmU5YTY2YjU5NzZmOTc3MmIxNDk3YjI2ZjM5MjI5YSIsImludGVybmFsX3NlY3JldCI6IjE2MDI1OTI4LWNiYjctNGU5ZS04YWM0LTcwNDIyYzFkYjg4MiJ9.adFlV9KHlVsadXkk9PFb2rPkDQcD2xBB_yBEZKg4vus"
-JWT_SECRET = "GovindaSecret1"
+
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
