@@ -1,17 +1,44 @@
+// {
+//   "compilerOptions": {
+//     // "paths": {
+//     //         "@govinda03/auracuts-common": [
+//     //             "./node_modules/@govinda03/auracuts-common/dist/zod.d.ts"
+//     //         ]
+//     //     },
+//     "target": "ESNext",
+//     "module": "ESNext",
+//     "moduleResolution": "node",
+//     "baseUrl": ".",
+//     "paths": {
+//       "@govinda03/auracuts-common": ["./node_modules/@govinda03/auracuts-common/dist/zod.d.ts"]
+//     },
+//     "strict": true,
+//     "skipLibCheck": true,
+//     "lib": [
+//       "ESNext"
+//     ],
+//     "types": [
+//       "@cloudflare/workers-types/2023-07-01"
+//     ],
+//     "jsx": "react-jsx",
+//     "jsxImportSource": "hono/jsx"
+//   },
+// }
+
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "skipLibCheck": true,
-    "lib": [
-      "ESNext"
-    ],
-    "types": [
-      "@cloudflare/workers-types/2023-07-01"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "target": "ES2020",                 // Target modern JavaScript
+    "module": "CommonJS",              // Use CommonJS for backend
+    "rootDir": "src",                  // Your source directory
+    "outDir": "dist",                  // Output directory for transpiled files
+    "strict": true,                    // Enable strict mode
+    "esModuleInterop": true,           // Allows default imports from CommonJS
+    "moduleResolution": "node",        // Resolve modules from `node_modules`
+    "baseUrl": ".",                    // Base path for the project
+    "paths": {
+      "@govinda03/auracuts-common": ["../common/dist/index.d.ts"] // Adjust if the common module is local
+    }
   },
+  "include": ["src"],                  // Include source files
+  "exclude": ["node_modules", "dist"] // Exclude unnecessary directories
 }

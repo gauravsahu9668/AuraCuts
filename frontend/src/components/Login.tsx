@@ -3,21 +3,32 @@ import React,{useState,useMemo} from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import {SigninInput} from "@govinda03/auracuts-common"
+import axios from 'axios';
+import { BACKEND_URL } from '../config';
+import { useNavigate } from 'react-router-dom';
 
-type FormFields={
-  username:string;
-  password:string;  
-}
+type FormFields=SigninInput;
 
 const Login=()=>{    
+  const navigate=useNavigate();
   const { register,
     handleSubmit,
     formState: {errors,isSubmitting},
   } = useForm<FormFields>();
 
-  const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
-    toast.success("Login Succesful")
-    console.log("sfjlsdf")
+  const onSubmit: SubmitHandler<FormFields>=async(Data:Record<string,any>)=>{
+    try{
+      const response=await axios.post(`${BACKEND_URL}/customer/login`,Data);
+      const jwt=response.data;
+      localStorage.setItem("token",jwt);
+      toast.success("Login Succesful")
+      navigate("/")
+    } 
+    catch(e){
+      toast.error("login request failed")
+    }
+    // console.log("sfjlsdf")
   };
 
   const goBack = () => {
@@ -45,7 +56,7 @@ const Login=()=>{
       }
   }
   return (
-      <div className="flex min-h-[800px] h-screen min-w-[1569px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
+    <div className="flex min-h-[800px] h-screen min-w-[1569px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
         <div className="flex bottom-8 w-[1190px] h-[630px]  relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
           {/* Welcome Section */}
           <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white cursor-default">
@@ -120,6 +131,7 @@ const Login=()=>{
                 />
                 <div className='h-3'>{errors.password && (<div className='text-red-500'>{errors.password.message}</div>)}</div>
               </div>
+              
   
               {/* Options */}
               <div className="flex items-center justify-between text-sm">
