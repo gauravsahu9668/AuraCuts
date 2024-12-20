@@ -5,7 +5,13 @@
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
-    "hono": "^4.6.13"
+    "@codingprism/auracuts-common": "^1.0.0",
+    "@codingprism/auracuts-commons": "^1.0.1",
+    "@prisma/client": "^6.0.1",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "cors": "^2.8.5",
+    "hono": "^4.6.13",
+    "prisma": "^6.0.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241112.0",

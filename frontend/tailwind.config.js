@@ -13,6 +13,7 @@ export default {
            'sky':'#a9cdec',
            'light-Orange':'#fbba97',
            'NavyBlue':'#00274D',
+           'amaze':'#28282B'
         },
       },
       fontFamily: {

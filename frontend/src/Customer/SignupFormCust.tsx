@@ -1,7 +1,9 @@
+import axios from "axios";
 import {SubmitHandler, useForm} from "react-hook-form"
 import toast from "react-hot-toast"
 import { DiVim } from 'react-icons/di';
-import { FormMethod } from 'react-router-dom';
+import { FormMethod, useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from "../config";
 
 
 type FormFields={
@@ -19,9 +21,32 @@ const SignupFormCust = () => {
     handleSubmit,
     formState: {errors,isSubmitting},
   }=useForm<FormFields>();
-
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
-    console.log()
+    try {
+      const response = await axios.post(`${BACKEND_URL}/customer/signup`,data);
+      const jwt = response.data
+      localStorage.setItem("token",jwt);
+      console.log(response.data);
+      navigate("/dashboard")
+      toast.success("Signup succssful!");
+    } catch (error:any) {
+      if (error.response) {
+        console.log(error);
+        const status = error.response.status;
+        const message = error.response.data.message;
+        if (status === 409) {
+          toast.error("User already exists.");
+        } else if (status === 400) {
+          toast.error("Invalid inputs. Please check your data.");
+        } else {
+          toast.error(message || "Something went wrong. Please try again.");
+        }
+      } else {
+        // Handle network or unexpected errors
+        toast.error("Network error. Please try again later.");
+      }
+    }
   }
   return (
     <div className="absolute left-0 top-12 w-full">
