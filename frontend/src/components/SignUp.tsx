@@ -5,10 +5,13 @@ import { FaApple } from "react-icons/fa6";
 // import SignFormShop from "../Shopkeeper/SignFormShop";
 import SignupFormCust from "../Customer/SignupFormCust";
 import SignFormShop from "../Shopkeeper/SignFormShop";
+import Navbar from "./Navbar";
 const SignUp = () => {
      const {id}=useParams();
   return (
-    <div className=" top-0 flex min-h-[800px] h-screen min-w-[1569px] items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
+    <>
+    <Navbar/>
+    <div className=" top-0 flex min-h-[800px] h-screen min-w-fit items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
         <div className="flex bottom-8 w-[1190px] h-[630px] relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
           {/* Welcome Section */}
             <div className=" p-20 h-full absolute left-0 w-2/4 px-36 bg-gradient-to-br  from-[#8360df] to-pink-300 text-white cursor-default">
@@ -52,6 +55,8 @@ const SignUp = () => {
             </div>
        </div>
     </div>
+    </>
+    
   )
 }
 
