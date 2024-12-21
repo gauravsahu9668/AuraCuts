@@ -82,7 +82,7 @@ customerRouter.post('/signup',async (c) => {
       return c.json({ token: jwt, message: 'Login successful!' });
     }
     catch(e){
-      c.status(411)
-      return c.text('Invalid')
+      c.status(403)
+      return c.text('you are not Logged in')
     }
   })

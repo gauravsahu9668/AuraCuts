@@ -146,6 +146,7 @@ const button2Handler=()=>{
                 <div className='h-3'>{errors.password && (<div className='text-red-500'>{errors.password.message}</div>)}</div>
               </div>
               
+              
   
               {/* Options */}
               <div className="flex items-center justify-between text-sm">
