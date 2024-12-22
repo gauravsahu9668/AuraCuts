@@ -8,7 +8,10 @@ import { BACKEND_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 import { LoginInput } from '@codingprism/auracuts-commons';
 import Navbar from './Navbar';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { app } from '../firebase.config';
+import { getAuth } from 'firebase/auth';
+const auth=getAuth(app);
 type FormFields=LoginInput;
 
 const Login=()=>{    
@@ -40,7 +43,19 @@ const button2Handler=()=>{
 }
 
   const onSubmit: SubmitHandler<FormFields>=async(Data:Record<string,any>)=>{
+    let email="";
     try{
+      await signInWithEmailAndPassword(auth,Data.email,Data.password).then((res)=>{
+        if(res){
+          // @ts-ignore
+          email=res.user.email
+        }
+      })
+    }catch(e:any){
+      alert(e.message)
+    }
+    if(email!==""){
+      try{
       if(selectedButton==="customer"){
         const response=await axios.post(`${BACKEND_URL}/customer/login`,Data);
       const jwt=response.data;
@@ -62,14 +77,11 @@ const button2Handler=()=>{
       console.log(e);
       toast.error("login request failed")
     }
-    // console.log("sfjlsdf")
+    }
   };
-
   const goBack = () => {
       window.history.back();
   };
-
-  
   return (
     <>
     <Navbar/>

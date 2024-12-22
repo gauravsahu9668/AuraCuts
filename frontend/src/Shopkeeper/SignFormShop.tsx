@@ -1,14 +1,11 @@
 
-import { SignupInput } from '@codingprism/auracuts-commons';
 import axios from 'axios';
-import React,{useState,useEffect, ChangeEvent} from 'react'
 import {SubmitHandler, useForm} from "react-hook-form"
 import toast from "react-hot-toast"
-import { DiVim } from 'react-icons/di';
-import { FormMethod, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../config';
-
-
+import { app } from '../firebase.config';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 type FormFields={
   firstName:string;
   lastName:string;
@@ -27,30 +24,49 @@ const SignFormShop = () => {
   }=useForm<FormFields>();
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
-    try {
-      const response = await axios.post(`${BACKEND_URL}/shopkeeper/signup`,data);
-      const jwt = response.data
-      localStorage.setItem("token",jwt);
-      console.log(response.data);
-      navigate("/dashboard")
-      toast.success("Signup succssful!");
-    } catch (error:any) {
-      console.log(error);
-      if (error.response) {
-        const status = error.response.status;
-        const message = error.response.data.message;
-        if (status === 409) {
-          toast.error("User already exists.");
-        } else if (status === 400) {
-          toast.error("Invalid inputs. Please check your data.");
-        } else {
-
-          toast.error(message || "Something went wrong. Please try again.");
+    console.log(data);
+    let email="" ;
+    try{
+      const auth= getAuth(app)
+      await createUserWithEmailAndPassword(auth,data.email,data.password).then((res)=>{
+        if(res){
+          //@ts-ignore 
+          email=res.user.email
+        }else{
+          email=""
         }
-      } else {
-        // Handle network or unexpected errors
+      }).catch((e)=>{
+        alert(e.message)
+      })
+    }catch(e){
+      console.log(e)
+    }
+    if(email!==""){
+      try {
+        const response = await axios.post(`${BACKEND_URL}/shopkeeper/signup`,data);
+        const jwt = response.data
+        localStorage.setItem("token",jwt);
+        console.log(response.data);
+        // navigate("/dashboard")
+        // toast.success("Signup succssful!");
+      } catch (error:any) {
         console.log(error);
-        toast.error("Network error. Please try again later.");
+        if (error.response) {
+          const status = error.response.status;
+          const message = error.response.data.message;
+          if (status === 409) {
+            toast.error("User already exists.");
+          } else if (status === 400) {
+            toast.error("Invalid inputs. Please check your data.");
+          } else {
+  
+            toast.error(message || "Something went wrong. Please try again.");
+          }
+        } else {
+          // Handle network or unexpected errors
+          console.log(error);
+          toast.error("Network error. Please try again later.");
+        }
       }
     }
   }

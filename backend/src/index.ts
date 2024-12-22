@@ -13,14 +13,14 @@ const app = new Hono<{
     JWT_SECRET:string;
   }
 }>()
+app.use('/*', cors())
 
-app.use('/*', cors({
-  origin: 'http://localhost:5173',
-  allowMethods: ['POST', 'GET', 'OPTIONS'], 
-  allowHeaders: ['Content-Type', 'Authorization'],
-}))
-
-
+app.get("/",async(c)=>{
+   return c.json({
+    success:true,
+    message:"salo home route hi not found hai ye to bna lete pehle "
+   })
+})
 app.route("/customer",customerRouter)
 app.route('/shopkeeper',shopkeeperRouter)
 

@@ -1,11 +1,12 @@
 import axios from "axios";
 import {SubmitHandler, useForm} from "react-hook-form"
 import toast from "react-hot-toast"
-import { DiVim } from 'react-icons/di';
 import { FormMethod, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from "../config";
-
-
+import { getAuth} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { app} from "../firebase.config";
+const auth=getAuth(app)
 type FormFields={
   firstName:string;
   lastName:string;
@@ -23,28 +24,46 @@ const SignupFormCust = () => {
   }=useForm<FormFields>();
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
-    try {
-      const response = await axios.post(`${BACKEND_URL}/customer/signup`,data);
-      const jwt = response.data
-      localStorage.setItem("token",jwt);
-      console.log(response.data);
-      navigate("/dashboard")
-      toast.success("Signup succssful!");
-    } catch (error:any) {
-      if (error.response) {
-        console.log(error);
-        const status = error.response.status;
-        const message = error.response.data.message;
-        if (status === 409) {
-          toast.error("User already exists.");
-        } else if (status === 400) {
-          toast.error("Invalid inputs. Please check your data.");
-        } else {
-          toast.error(message || "Something went wrong. Please try again.");
+    let email="" ;
+        try{
+          const auth= getAuth(app)
+          await createUserWithEmailAndPassword(auth,data.email,data.password).then((res:any)=>{
+            if(res){
+              //@ts-ignore 
+              email=res.user.email
+            }else{
+              email=""
+            }
+          }).catch((e:any)=>{
+            alert(e.message)
+          })
+        }catch(e){
+          console.log(e)
         }
-      } else {
-        // Handle network or unexpected errors
-        toast.error("Network error. Please try again later.");
+    if(email!==""){
+      try {
+        const response = await axios.post(`${BACKEND_URL}/customer/signup`,data);
+        const jwt = response.data
+        localStorage.setItem("token",jwt);
+        console.log(response.data);
+        navigate("/dashboard")
+        toast.success("Signup succssful!");
+      } catch (error:any) {
+        if (error.response) {
+          console.log(error);
+          const status = error.response.status;
+          const message = error.response.data.message;
+          if (status === 409) {
+            toast.error("User already exists.");
+          } else if (status === 400) {
+            toast.error("Invalid inputs. Please check your data.");
+          } else {
+            toast.error(message || "Something went wrong. Please try again.");
+          }
+        } else {
+          // Handle network or unexpected errors
+          toast.error("Network error. Please try again later.");
+        }
       }
     }
   }

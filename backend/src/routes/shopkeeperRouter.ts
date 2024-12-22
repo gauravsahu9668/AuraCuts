@@ -11,14 +11,6 @@ export const shopkeeperRouter = new Hono<{
       JWT_SECRET:string
     }
   }>()
-  shopkeeperRouter.use('/*', cors({
-    origin: 'http://localhost:5173', 
-    allowMethods: ['POST', 'GET', 'OPTIONS'],
-    allowHeaders: ['Content-Type', 'Authorization'],
-  }))
-  
-  
-
   shopkeeperRouter.post('/signup', async (c) => {
     const body=await c.req.json();
     const {success} = signupInput.safeParse(body);
@@ -45,16 +37,14 @@ export const shopkeeperRouter = new Hono<{
       const jwt=await sign({
         id:shopkeeper.id,
       },c.env.JWT_SECRET);
-      return c.json({ token: jwt, message: 'Signup successful!' });
+      return c.json({ token: jwt, message: 'Signup successful!',userId:shopkeeper.id });
       
     } catch (error) {
-        c.status(409); // 409 Conflict
+        c.status(409);
         console.log(error);
         return c.json({ message: 'User already exists with this email.' });
     }
   })
-
-
   shopkeeperRouter.post('/login',async (c) => {
       const body=await c.req.json();
       const {success}=loginInput.safeParse(body);
@@ -83,7 +73,7 @@ export const shopkeeperRouter = new Hono<{
             id: user.id,
           }, c.env.JWT_SECRET);
       
-          return c.json({ token: jwt, message: 'Login successful!' });
+          return c.json({ token: jwt, message: 'Login successful!',userId:user.id });
       }
       catch(e){
         c.status(403)

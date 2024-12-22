@@ -21,8 +21,6 @@ model Customer{
   password      String
   phoneNumber   String @unique
 }
-
-
 model Shopkeeper{
   id           Int @id @default(autoincrement())
   email         String @unique

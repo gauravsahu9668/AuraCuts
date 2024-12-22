@@ -11,13 +11,6 @@ export const customerRouter = new Hono<{
     JWT_SECRET:string
   }
 }>()
-customerRouter.use('/*', cors({
-  origin: 'http://localhost:5173', 
-  allowMethods: ['POST', 'GET', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization'],
-}))
-
-
 customerRouter.post('/signup',async (c) => {
     const body=await c.req.json();
     const {success}=signupInput.safeParse(body);
@@ -44,7 +37,7 @@ customerRouter.post('/signup',async (c) => {
       const jwt=await sign({
         id:customer.id,  
       },c.env.JWT_SECRET);
-      return c.json({ token: jwt, message: 'Signup successful!' })
+      return c.json({ token: jwt, message: 'Signup successful!',userId:customer.id })
     }
     catch(e){
       c.status(411)
@@ -79,7 +72,7 @@ customerRouter.post('/signup',async (c) => {
       const jwt = await sign({
         id: user.id,
       }, c.env.JWT_SECRET);
-      return c.json({ token: jwt, message: 'Login successful!' });
+      return c.json({ token: jwt, message: 'Login successful!',userId:user.id });
     }
     catch(e){
       c.status(403)

@@ -1,21 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBaQrXszrHgvWn_zETD7Eg70anYVfRt4ro",
-  authDomain: "aura-cuts.firebaseapp.com",
-  projectId: "aura-cuts",
-  storageBucket: "aura-cuts.firebasestorage.app",
-  messagingSenderId: "149235532841",
-  appId: "1:149235532841:web:fa17d7c1d93480ca1f0838",
-  measurementId: "G-5WBXG5SWEJ"
+  apiKey: "AIzaSyDftJZvjuX3jtMRBCVB4fCf_4z7Uc85Qjg",
+  authDomain: "auracuts-e3f63.firebaseapp.com",
+  projectId: "auracuts-e3f63",
+  storageBucket: "auracuts-e3f63.firebasestorage.app",
+  messagingSenderId: "931076559070",
+  appId: "1:931076559070:web:f3a2249dc62811d7d6324f",
+  databaseURL:"https://auracuts-e3f63-default-rtdb.firebaseio.com"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+export const app = initializeApp(firebaseConfig);
