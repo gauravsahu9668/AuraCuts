@@ -96,8 +96,8 @@ const SignFormShop = () => {
       toast.error("Enter valid otp")
     }
   }
-const [useremail,setemail]=useState("");
-const [userpassword,setpassword]=useState("");
+  const [useremail,setemail]=useState("");
+  const [userpassword,setpassword]=useState("");
   const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
     console.log(data)
     try{

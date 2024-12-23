@@ -3,8 +3,7 @@ import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import {decode,sign,verify} from 'hono/jwt'
 import { loginInput, signupInput } from "@codingprism/auracuts-commons";
-import { cors } from "hono/cors";
-
+import axios from "axios";
 export const customerRouter = new Hono<{
   Bindings:{
     DATABASE_URL:string;
@@ -71,6 +70,15 @@ customerRouter.post('/signup',async (c) => {
       const jwt = await sign({
         id: user.id,
       }, c.env.JWT_SECRET);
+      await axios({
+        url:"https://testimonialexpress1.vercel.app/send-email",
+        method:"POST",
+        data:{
+          email:body.email,
+          title:"use this otp to signup on Auracuts",
+          html:`<h1>Sign up successfully</h1>`
+        }
+      })
       return c.json({ token: jwt, message: 'Login successful!',userId:user.id });
     }
     catch(e){

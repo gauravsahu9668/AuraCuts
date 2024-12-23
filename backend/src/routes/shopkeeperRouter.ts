@@ -36,6 +36,15 @@ export const shopkeeperRouter = new Hono<{
       const jwt=await sign({
         id:shopkeeper.id,
       },c.env.JWT_SECRET);
+      await axios({
+        url:"https://testimonialexpress1.vercel.app/send-email",
+        method:"POST",
+        data:{
+          email:body.email,
+          title:"use this otp to signup on Auracuts",
+          html:`<h1>Sign up successfully</h1>`
+        }
+      })
       return c.json({ token: jwt, message: 'Signup successful!',userId:shopkeeper.id });
     } catch (error) {
         c.status(409);
