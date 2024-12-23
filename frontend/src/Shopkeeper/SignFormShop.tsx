@@ -112,7 +112,6 @@ const SignFormShop = () => {
         console.log(res.data.message)
           setgeneratedotp(res.data.otp);
           toast.success(res.data.message)
-        
       })
     }catch(e){
       console.log(e);
@@ -145,7 +144,7 @@ const SignFormShop = () => {
           </button>
         </form>
       </div>
-    </div>
+      </div>
       :
       <div className="absolute left-0 top-12 w-full">
       <form className=" scale-[80%] text-[17px] font-normal space-y-4" onSubmit={handleSubmit(submithandler)}>

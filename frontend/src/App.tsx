@@ -6,7 +6,7 @@ import Login from "./components/Login"
 import Contact from "./components/ContactUs/Contact"
 import ScrollToTop from "./components/ScrollToTop"
 import { Toaster } from "react-hot-toast"
-
+import ProfileMainPage from "./Shopkeeper/ProfileSteps/ProfileMainPage"
 function App() {
     return (
       <>
@@ -17,6 +17,7 @@ function App() {
         <Route path='/signup/:id' element={<SignUp></SignUp>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
+        <Route path='/profilebuilder' element={<ProfileMainPage></ProfileMainPage>}></Route>
       </Routes>
     </ScrollToTop>
       </>
