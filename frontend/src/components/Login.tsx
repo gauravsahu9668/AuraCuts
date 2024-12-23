@@ -11,10 +11,13 @@ import Navbar from './Navbar';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebase.config';
 import { getAuth } from 'firebase/auth';
+import Loader from './Loader';
 const auth=getAuth(app);
 type FormFields=LoginInput;
 
 const Login=()=>{    
+  const [isLoading,setIsLoading]=useState(false);
+
   const navigate=useNavigate();
   const { register,
     handleSubmit,
@@ -43,6 +46,7 @@ const button2Handler=()=>{
 }
 
   const onSubmit: SubmitHandler<FormFields>=async(Data:Record<string,any>)=>{
+    setIsLoading(true);
     let email="";
     try{
       await signInWithEmailAndPassword(auth,Data.email,Data.password).then((res)=>{
@@ -78,6 +82,7 @@ const button2Handler=()=>{
       toast.error("login request failed")
     }
     }
+    setIsLoading(false);
   };
   const goBack = () => {
       window.history.back();
@@ -183,7 +188,7 @@ const button2Handler=()=>{
                   type="submit"
                   className="w-[50%] text-[18px] py-3 bg-gradient-to-r from-purple-700 to-blue-500 text-white font-medium rounded-full hover:from-blue-500 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
-                  LOGIN
+                  {isLoading?<Loader/>:"LOGIN"}
                   </button>
               </div>
 
