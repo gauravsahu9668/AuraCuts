@@ -74,7 +74,7 @@ const SignFormShop = () => {
         const jwt = response.data
         localStorage.setItem("token",jwt);
         console.log(response.data);
-        navigate("/dashboard")
+        navigate("/profilebuilder")
         toast.success("Signup succssful!");
       } catch (error:any) {
         console.log(error);

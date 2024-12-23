@@ -1,4 +1,4 @@
-import React from "react";
+
 export default () =>{
     return(
         <div className="flex justify-center items-center">
@@ -6,5 +6,4 @@ export default () =>{
             {/* <div>{props.typo==="signup"?"Signing Up...":""}</div> */}
         </div>
     )
-
 }
