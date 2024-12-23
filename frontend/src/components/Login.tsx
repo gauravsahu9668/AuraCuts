@@ -74,7 +74,7 @@ const button2Handler=()=>{
         console.log(jwt);
         localStorage.setItem("token",jwt);
         toast.success("Login Succesfull")
-         navigate("/dashboard")
+         navigate("/profilebuilder")
       }
     } 
     catch(e){

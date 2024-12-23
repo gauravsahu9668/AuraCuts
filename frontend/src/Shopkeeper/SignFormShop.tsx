@@ -18,6 +18,13 @@ type FormFields={
   password:string;
   confirm_pw:string;
 }
+const  initaldata={
+  firstName:"",
+  lastName:"",
+  email:"",
+  phone:"",
+  password:"",confirm_pw:""
+}
 const SignFormShop = () => {
   const [isLoading,setIsLoading]=useState(false);
 
@@ -28,7 +35,6 @@ const SignFormShop = () => {
     formState: {errors},
   }=useForm<FormFields>();
   const navigate = useNavigate();
-  const formData:any=new FormData();
   const [generatedotp,setgeneratedotp]=useState("");
   const [sendotp,setsendotp]=useState(false);
   const [userotp, setOtp] = useState("");
@@ -39,15 +45,15 @@ const SignFormShop = () => {
       setOtp(value);
     }
   };
+  const [userdata,setuserdata]=useState<FormFields>(initaldata)
   const submitsignup=async()=>{
     setIsLoading(true)
+    console.log(userdata)
     if(generatedotp===userotp){
       toast.success("correct otp")
        let email="" ;
-       console.log(useremail)
-       console.log(userpassword)
     try{
-      await createUserWithEmailAndPassword(auth,useremail,userpassword).then((res)=>{
+      await createUserWithEmailAndPassword(auth,userdata.email,userdata.password).then((res)=>{
         if(res){
           //@ts-ignore 
           email=res.user.email
@@ -64,11 +70,14 @@ const SignFormShop = () => {
       try {
         // const response = await axios(`${BACKEND_URL}/shopkeeper/signup`,formDa);
         const response=await axios({
-          url:"${BACKEND_URL}/shopkeeper/signup",
+          url:`${BACKEND_URL}/shopkeeper/signup`,
           method:"POST",
           data:{
-            email:formData.email,
-            password:formData.password
+            email:userdata.email,
+            password:userdata.password,
+            firstName:userdata.firstName,
+            lastName:userdata.lastName,
+            phone:userdata.phone
           }
         })
         const jwt = response.data
@@ -77,7 +86,7 @@ const SignFormShop = () => {
         navigate("/profilebuilder")
         toast.success("Signup succssful!");
       } catch (error:any) {
-        console.log(error);
+        console.log(error.message);
         if (error.response) {
           const status = error.response.status;
           const message = error.response.data.message;
@@ -102,19 +111,14 @@ const SignFormShop = () => {
     }
     setIsLoading(false)
   }
-
-  const [useremail,setemail]=useState("");
-  const [userpassword,setpassword]=useState("");
-
-  const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+  const submithandler: SubmitHandler<FormFields>=async(data)=>{
     setIsLoading(true)
-    console.log(data)
     try{
       await axios({
-        url:"http://127.0.0.1:8787/shopkeeper/send-otp",
+        url:`${BACKEND_URL}/shopkeeper/send-otp`,
         method:"POST",
         data:{
-          email:data.email
+          email:data.email,
         }
       }).then((res:any)=>{
         console.log(res.data.otp);
@@ -126,9 +130,9 @@ const SignFormShop = () => {
       console.log(e);
     }
     setsendotp(true);
-    setemail(data.email);
-    setpassword(data.password);
     setIsLoading(false)
+    setuserdata(data)
+    console.log(userdata)
   }
   return (
     <>

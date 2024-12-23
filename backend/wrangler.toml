@@ -1,4 +1,4 @@
-name = "backend"
+name = "server"
 main = "src/index.ts"
 compatibility_date = "2024-12-06"
 # compatibility_flags = [ "nodejs_compat" ]
@@ -7,7 +7,7 @@ DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsI
 JWT_SECRET ="AURACUTS"
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# id = "240b07696b81893731419181663dbd24"
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
 # bucket_name = "my-bucket"

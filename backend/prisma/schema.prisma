@@ -7,12 +7,10 @@
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Customer{
   id            Int @id @default(autoincrement())
   email         String @unique
@@ -29,3 +27,4 @@ model Shopkeeper{
   password      String
   phoneNumber   String @unique
 }
+

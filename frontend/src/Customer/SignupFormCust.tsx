@@ -17,7 +17,13 @@ type FormFields={
   password:string;
   confirm_pw:string;
 }
-
+const  initaldata={
+  firstName:"",
+  lastName:"",
+  email:"",
+  phone:"",
+  password:"",confirm_pw:""
+}
 const SignupFormCust = () => {
   const [isLoading,setIsLoading]=useState(false);
   const{
@@ -26,7 +32,6 @@ const SignupFormCust = () => {
     formState: {errors,isSubmitting},
   }=useForm<FormFields>();
   const navigate = useNavigate();
-  const formData:any=new FormData();
   const [generatedotp,setgeneratedotp]=useState("");
   const [sendotp,setsendotp]=useState(false);
   const [userotp, setOtp] = useState("");
@@ -37,15 +42,14 @@ const SignupFormCust = () => {
       setOtp(value);
     }
   };
+  const [userdata,setuserdata]=useState<FormFields>(initaldata)
   const submitsignup=async()=>{
     setIsLoading(true)
     if(generatedotp===userotp){
       toast.success("correct otp")
        let email="" ;
-       console.log(useremail)
-       console.log(userpassword)
     try{
-      await createUserWithEmailAndPassword(auth,useremail,userpassword).then((res)=>{
+      await createUserWithEmailAndPassword(auth,userdata.email,userdata.password).then((res)=>{
         if(res){
           //@ts-ignore 
           email=res.user.email
@@ -62,11 +66,14 @@ const SignupFormCust = () => {
       try {
         // const response = await axios(`${BACKEND_URL}/shopkeeper/signup`,formDa);
         const response=await axios({
-          url:"${BACKEND_URL}/shopkeeper/signup",
+          url:`${BACKEND_URL}/customer/signup`,
           method:"POST",
           data:{
-            email:formData.email,
-            password:formData.password
+            email:userdata.email,
+            password:userdata.password,
+            phone:userdata.phone,
+            firstName:userdata.firstName,
+            lastName:userdata.lastName
           }
         })
         const jwt = response.data
@@ -100,14 +107,11 @@ const SignupFormCust = () => {
     }
     setIsLoading(false)
   }
-const [useremail,setemail]=useState("");
-const [userpassword,setpassword]=useState("");
-  const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+  const submithandler: SubmitHandler<FormFields>=async(data)=>{
     setIsLoading(true)
-    console.log(data)
     try{
       await axios({
-        url:"http://127.0.0.1:8787/shopkeeper/send-otp",
+        url:`${BACKEND_URL}/shopkeeper/send-otp`,
         method:"POST",
         data:{
           email:data.email
@@ -123,8 +127,7 @@ const [userpassword,setpassword]=useState("");
       console.log(e);
     }
     setsendotp(true);
-    setemail(data.email);
-    setpassword(data.password);
+    setuserdata(data)
     setIsLoading(false)
   }
   return (
