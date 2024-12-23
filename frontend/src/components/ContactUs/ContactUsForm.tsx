@@ -1,6 +1,7 @@
 
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import axios from "axios";
 import { useEffect } from "react";
 const ContactUsForm = () => {
   const {
@@ -9,12 +10,40 @@ const ContactUsForm = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm();
-
   const submitContactForm = async (data: Record<string, any>) => {
-    toast.success("Message sent successfully");
-    reset();
+    console.log(data)
+    try{
+  await  axios({
+    url:"https://testimonialexpress1.vercel.app/send-email",
+    method:"POST",
+    data:{
+      email:"sahug6194@gmail.com",
+      title:"congratulations your text review submitted successfully",
+      html:`
+      <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="text-align: center; background-color: #4caf50; color: white; padding: 10px; border-radius: 8px 8px 0 0;">
+          <h1 style="margin: 0; font-size: 24px;">Customer Inquiry</h1>
+        </div>
+        <div style="padding: 20px; color: #333333;">
+          <p style="margin: 8px 0;"><strong>First Name:</strong>${data.firstname}</p>
+          <p style="margin: 8px 0;"><strong>Last Name:</strong>${data.lastname}</p>
+          <p style="margin: 8px 0;"><strong>Email:</strong>${data.email}</p>
+          <p style="margin: 8px 0;"><strong>Phone Number:</strong>${data.phoneno}</p>
+          <p style="margin: 8px 0;">Message from the customer</p>
+          <p style="margin: 8px 0;"><strong>${data.message}</strong></p>
+        </div>
+        <div style="text-align: center; font-size: 12px; color: #888888; margin-top: 20px;">
+          <p style="margin: 0;">&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+      </div>`
+    }
+  }).then((response)=>{
+    console.log(response)
+  })
+    }catch(e:any){
+      console.log(e.message);
+    }
   };
-
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset({

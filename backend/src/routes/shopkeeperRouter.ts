@@ -4,7 +4,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { sign } from "hono/jwt";
-
+import axios from "axios";
 export const shopkeeperRouter = new Hono<{
     Bindings:{
       DATABASE_URL:string;
@@ -23,7 +23,6 @@ export const shopkeeperRouter = new Hono<{
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
-  
     try {
       const shopkeeper=await prisma.shopkeeper.create({
         data: {
@@ -38,7 +37,6 @@ export const shopkeeperRouter = new Hono<{
         id:shopkeeper.id,
       },c.env.JWT_SECRET);
       return c.json({ token: jwt, message: 'Signup successful!',userId:shopkeeper.id });
-      
     } catch (error) {
         c.status(409);
         console.log(error);
@@ -80,3 +78,27 @@ export const shopkeeperRouter = new Hono<{
         return c.text('you are not Logged in')
       }
     })
+ shopkeeperRouter.post('/send-otp',async(c)=>{
+    try{
+      const body=await c.req.json();
+      const otp = Math.random().toString().slice(2, 8); // Generates a 6-digit OTP
+      await axios({
+        url:"https://testimonialexpress1.vercel.app/send-email",
+        method:"POST",
+        data:{
+          email:body.email,
+          title:"use this otp to signup on Auracuts",
+          html:`<h1>Otp: ${otp}</h1>`
+        }
+      })
+      return c.json({
+        success:true,otp,message:" otp send successfully"
+      })
+    }catch(e:any){
+      return c.json({
+        success:false,
+        message:"otp not send",
+        data:e.message
+      })
+    }
+ })

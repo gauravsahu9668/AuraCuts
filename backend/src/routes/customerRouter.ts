@@ -44,7 +44,6 @@ customerRouter.post('/signup',async (c) => {
       return c.text('Invalid')
     }
   })
-  
   customerRouter.post('/login',async (c) => {
     const body=await c.req.json();
     const {success}=loginInput.safeParse(body);

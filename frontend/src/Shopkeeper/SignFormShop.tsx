@@ -6,6 +6,8 @@ import { BACKEND_URL } from '../config';
 import { app } from '../firebase.config';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+const auth= getAuth(app)
 type FormFields={
   firstName:string;
   lastName:string;
@@ -14,7 +16,6 @@ type FormFields={
   password:string;
   confirm_pw:string;
 }
-
 const SignFormShop = () => {
   const{
     register,
@@ -23,12 +24,25 @@ const SignFormShop = () => {
     formState: {errors},
   }=useForm<FormFields>();
   const navigate = useNavigate();
-  const onSubmit: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
-    console.log(data);
-    let email="" ;
+  const formData:any=new FormData();
+  const [generatedotp,setgeneratedotp]=useState("");
+  const [sendotp,setsendotp]=useState(false);
+  const [userotp, setOtp] = useState("");
+  const handleChange = (e:any) => {
+    const value = e.target.value;
+    // Allow only numeric values and limit to 6 digits
+    if (/^\d{0,6}$/.test(value)) {
+      setOtp(value);
+    }
+  };
+  const submitsignup=async()=>{
+    if(generatedotp===userotp){
+      toast.success("correct otp")
+       let email="" ;
+       console.log(useremail)
+       console.log(userpassword)
     try{
-      const auth= getAuth(app)
-      await createUserWithEmailAndPassword(auth,data.email,data.password).then((res)=>{
+      await createUserWithEmailAndPassword(auth,useremail,userpassword).then((res)=>{
         if(res){
           //@ts-ignore 
           email=res.user.email
@@ -43,12 +57,20 @@ const SignFormShop = () => {
     }
     if(email!==""){
       try {
-        const response = await axios.post(`${BACKEND_URL}/shopkeeper/signup`,data);
+        // const response = await axios(`${BACKEND_URL}/shopkeeper/signup`,formDa);
+        const response=await axios({
+          url:"${BACKEND_URL}/shopkeeper/signup",
+          method:"POST",
+          data:{
+            email:formData.email,
+            password:formData.password
+          }
+        })
         const jwt = response.data
         localStorage.setItem("token",jwt);
         console.log(response.data);
-        // navigate("/dashboard")
-        // toast.success("Signup succssful!");
+        navigate("/dashboard")
+        toast.success("Signup succssful!");
       } catch (error:any) {
         console.log(error);
         if (error.response) {
@@ -69,10 +91,64 @@ const SignFormShop = () => {
         }
       }
     }
+    }
+    else{
+      toast.error("Enter valid otp")
+    }
+  }
+const [useremail,setemail]=useState("");
+const [userpassword,setpassword]=useState("");
+  const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+    console.log(data)
+    try{
+      await axios({
+        url:"http://127.0.0.1:8787/shopkeeper/send-otp",
+        method:"POST",
+        data:{
+          email:data.email
+        }
+      }).then((res:any)=>{
+        console.log(res.data.otp);
+        console.log(res.data.message)
+          setgeneratedotp(res.data.otp);
+          toast.success(res.data.message)
+        
+      })
+    }catch(e){
+      console.log(e);
+    }
+    setsendotp(true);
+    setemail(data.email);
+    setpassword(data.password);
   }
   return (
-    <div className="absolute left-0 top-12 w-full">
-      <form className=" scale-[80%] text-[17px] font-normal space-y-4" onSubmit={handleSubmit(onSubmit)}>
+    <>
+    {
+      sendotp ? 
+      <div className="flex justify-center items-center mt-3 py-16 bg-gray-100">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-semibold text-gray-800 text-center mb-4">Enter OTP</h1>
+        <form onSubmit={handleSubmit(submitsignup)} className="flex flex-col space-y-4">
+          <input
+            type="text"
+            value={userotp}
+            onChange={handleChange}
+            maxLength={6}
+            placeholder="Enter 6-digit OTP"
+            className="text-center text-lg px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:border-indigo-300 transition-all duration-300"
+          />
+          <button
+            type="submit"
+            className="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+      :
+      <div className="absolute left-0 top-12 w-full">
+      <form className=" scale-[80%] text-[17px] font-normal space-y-4" onSubmit={handleSubmit(submithandler)}>
                 {/* Username Input */}
                 <div className="flex flex-row justify-between w-full">
                   <div className="flex-row justify-center items-center w-[50%]">
@@ -166,6 +242,8 @@ const SignFormShop = () => {
               </form>
               
     </div>
+    }
+    </>
   )
 }
 export default SignFormShop
