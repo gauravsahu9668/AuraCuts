@@ -7,6 +7,7 @@ import { getAuth} from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { app} from "../firebase.config";
 import { useState } from "react";
+import Loader from "../components/Loader";
 const auth=getAuth(app)
 type FormFields={
   firstName:string;
@@ -18,6 +19,7 @@ type FormFields={
 }
 
 const SignupFormCust = () => {
+  const [isLoading,setIsLoading]=useState(false);
   const{
     register,
     handleSubmit,
@@ -36,6 +38,7 @@ const SignupFormCust = () => {
     }
   };
   const submitsignup=async()=>{
+    setIsLoading(true)
     if(generatedotp===userotp){
       toast.success("correct otp")
        let email="" ;
@@ -95,10 +98,12 @@ const SignupFormCust = () => {
     else{
       toast.error("Enter valid otp")
     }
+    setIsLoading(false)
   }
 const [useremail,setemail]=useState("");
 const [userpassword,setpassword]=useState("");
   const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+    setIsLoading(true)
     console.log(data)
     try{
       await axios({
@@ -120,6 +125,7 @@ const [userpassword,setpassword]=useState("");
     setsendotp(true);
     setemail(data.email);
     setpassword(data.password);
+    setIsLoading(false)
   }
   return (
     <>
@@ -141,7 +147,7 @@ const [userpassword,setpassword]=useState("");
             type="submit"
             className="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
           >
-            Submit
+            {isLoading?<Loader/>:"Submit"}
           </button>
         </form>
       </div>
@@ -245,7 +251,7 @@ const [userpassword,setpassword]=useState("");
                     type="submit"
                     className="w-[50%] py-3 bg-gradient-to-r from-purple-700 to-blue-500 text-white font-semibold rounded-full hover:from-blue-500 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
-                    SIGN UP
+                    {isLoading?<Loader/>:"SIGN UP"}
                     </button>
                 </div>
 

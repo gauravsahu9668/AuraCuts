@@ -7,6 +7,8 @@ import { app } from '../firebase.config';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Loader from '../components/Loader';
+
 const auth= getAuth(app)
 type FormFields={
   firstName:string;
@@ -17,6 +19,8 @@ type FormFields={
   confirm_pw:string;
 }
 const SignFormShop = () => {
+  const [isLoading,setIsLoading]=useState(false);
+
   const{
     register,
     handleSubmit,
@@ -36,6 +40,7 @@ const SignFormShop = () => {
     }
   };
   const submitsignup=async()=>{
+    setIsLoading(true)
     if(generatedotp===userotp){
       toast.success("correct otp")
        let email="" ;
@@ -95,10 +100,14 @@ const SignFormShop = () => {
     else{
       toast.error("Enter valid otp")
     }
+    setIsLoading(false)
   }
+
   const [useremail,setemail]=useState("");
   const [userpassword,setpassword]=useState("");
+
   const submithandler: SubmitHandler<FormFields>=async(data:Record<string,any>)=>{
+    setIsLoading(true)
     console.log(data)
     try{
       await axios({
@@ -119,6 +128,7 @@ const SignFormShop = () => {
     setsendotp(true);
     setemail(data.email);
     setpassword(data.password);
+    setIsLoading(false)
   }
   return (
     <>
@@ -139,8 +149,8 @@ const SignFormShop = () => {
           <button
             type="submit"
             className="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
-          >
-            Submit
+            >
+            {isLoading?<Loader/>:"Submit"}
           </button>
         </form>
       </div>
@@ -234,7 +244,7 @@ const SignFormShop = () => {
                     <button 
                     type="submit"
                     className="w-[50%] py-3 bg-gradient-to-r from-purple-700 to-blue-500 text-white font-semibold rounded-full hover:from-blue-500 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    SIGN UP
+                    {isLoading?<Loader/>:"SIGN UP"}
                     </button>
                 </div>
                 
