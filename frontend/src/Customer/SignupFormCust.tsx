@@ -8,6 +8,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { app} from "../firebase.config";
 import { useState } from "react";
 import Loader from "../components/Loader";
+import { useDispatch } from "react-redux";
+import { settoken, setuser } from "../Slices/authReducer";
 const auth=getAuth(app)
 type FormFields={
   firstName:string;
@@ -42,6 +44,7 @@ const SignupFormCust = () => {
       setOtp(value);
     }
   };
+  const dispatch=useDispatch()
   const [userdata,setuserdata]=useState<FormFields>(initaldata)
   const submitsignup=async()=>{
     setIsLoading(true)
@@ -79,6 +82,8 @@ const SignupFormCust = () => {
         const jwt = response.data
         localStorage.setItem("token",jwt);
         console.log(response.data);
+        dispatch(settoken(jwt))
+        dispatch(setuser("customer"))
         navigate("/profilebuilder")
         toast.success("Signup succssful!");
       } catch (error:any) {

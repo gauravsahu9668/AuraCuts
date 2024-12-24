@@ -12,6 +12,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebase.config';
 import { getAuth } from 'firebase/auth';
 import Loader from './Loader';
+import { useDispatch } from 'react-redux';
+import { settoken, setuser } from '../Slices/authReducer';
 const auth=getAuth(app);
 type FormFields=LoginInput;
 
@@ -44,6 +46,7 @@ const button2Handler=()=>{
       setSelectedButton(null)
     }
 }
+const dispatch=useDispatch()
 
   const onSubmit: SubmitHandler<FormFields>=async(Data:Record<string,any>)=>{
     setIsLoading(true);
@@ -63,18 +66,20 @@ const button2Handler=()=>{
       if(selectedButton==="customer"){
         const response=await axios.post(`${BACKEND_URL}/customer/login`,Data);
       const jwt=response.data;
-      console.log(jwt);
       localStorage.setItem("token",jwt);
+      dispatch(settoken(jwt))
+      dispatch(setuser("customer"))
       toast.success("Login Succesfull")
-      navigate("/profilebuilder")
+      navigate("/")
       }
       if(selectedButton==="shopkeeper"){
         const response=await axios.post(`${BACKEND_URL}/shopkeeper/login`,Data);
         const jwt=response.data;
-        console.log(jwt);
         localStorage.setItem("token",jwt);
+        dispatch(setuser("shopkeeper"))
+        dispatch(settoken(jwt))
         toast.success("Login Succesfull")
-         navigate("/profilebuilder")
+         navigate("/")
       }
     } 
     catch(e){
@@ -89,7 +94,7 @@ const button2Handler=()=>{
   };
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className="flex min-h-[800px] h-screen min-w-fit items-center font-display justify-center cursor-default bg-gradient-to-br from-[#8360df] to-pink-300">
         <div className="flex bottom-8 w-[1190px] h-[630px]  relative bg-white rounded- shadow-slate-800 shadow-2xl overflow-hidden">
           {/* Welcome Section */}

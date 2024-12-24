@@ -80,7 +80,7 @@ export const shopkeeperRouter = new Hono<{
             id: user.id,
           }, c.env.JWT_SECRET);
       
-          return c.json({ token: jwt, message: 'Login successful!',userId:user.id });
+          return c.json({ token: jwt, message: 'Login successful!',userId:user.id,user:"shopkeeper" });
       }
       catch(e){
         c.status(403)

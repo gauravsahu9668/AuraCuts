@@ -8,7 +8,7 @@ export default function Landing_Page(){
     return (
       <>
             <div className="relative min-h-[800px] min-w-fit flex flex-col items-center justify-center">
-                <Navbar/>
+                {/* <Navbar/> */}
           <Section1/>
           <Section2/>
           <Section3/>

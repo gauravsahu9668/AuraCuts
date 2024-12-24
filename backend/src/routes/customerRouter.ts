@@ -79,7 +79,7 @@ customerRouter.post('/signup',async (c) => {
           html:`<h1>Sign up successfully</h1>`
         }
       })
-      return c.json({ token: jwt, message: 'Login successful!',userId:user.id });
+      return c.json({ token: jwt, message: 'Login successful!',userId:user.id,user:"customer" });
     }
     catch(e){
       c.status(403)

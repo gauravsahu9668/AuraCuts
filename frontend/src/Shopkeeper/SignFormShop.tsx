@@ -8,6 +8,8 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Loader from '../components/Loader';
+import { useDispatch } from 'react-redux';
+import { settoken, setuser } from '../Slices/authReducer';
 
 const auth= getAuth(app)
 type FormFields={
@@ -82,8 +84,10 @@ const SignFormShop = () => {
         })
         const jwt = response.data
         localStorage.setItem("token",jwt);
-        console.log(response.data);
-        navigate("/profilebuilder")
+        const dispatch=useDispatch();
+        dispatch(settoken(jwt))
+        dispatch(setuser("shopkeeper"))
+        navigate("/")
         toast.success("Signup succssful!");
       } catch (error:any) {
         console.log(error.message);
